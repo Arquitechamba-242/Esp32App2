@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "563138228379",
+    "firebase_url": "https://conexionesp32app-default-rtdb.firebaseio.com",
+    "project_id": "conexionesp32app",
+    "storage_bucket": "conexionesp32app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563138228379:android:8b543428978d103ff5563e",
+        "android_client_info": {
+          "package_name": "com.dmedic.conexionesp32"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0iRQ3gyoiOvamQ8S2ApXy9_VK6MhNOAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563138228379:android:586c9c49f7488d14f5563e",
+        "android_client_info": {
+          "package_name": "com.mypackage.espapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0iRQ3gyoiOvamQ8S2ApXy9_VK6MhNOAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

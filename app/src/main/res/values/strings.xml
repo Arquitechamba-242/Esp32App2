@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ESPApplication</string>
+    <string name="STATUS_ON">CONECTADO</string>
+    <string name="STATUS_OFF">DESCONECTADO</string>
+    <string name="STATUS_CONNECTING">CONECTANDO...</string>
+    <string name="field0">Perfil Elegido</string>
+    <string name="field1">Temperatura</string>
+    <string name="field2">Presión</string>
+    <string name="field3">Altura</string>
+    <string name="field4">ADC</string>
+    <string name="field5">Voltaje</string>
+    <string name="field6">infAlcohol</string>
+    <string name="profileButton">Cambiar</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+</resources>
