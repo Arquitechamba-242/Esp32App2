@@ -9,4 +9,4 @@ class Profile (
     val temperature : Parameter = Parameter(),
     val pressure : Parameter = Parameter(),
     val altitude : Parameter = Parameter(),
-    val soil_humidity : Parameter = Parameter()) : Parameter()
+    val soil_humidity : Parameter = Parameter())

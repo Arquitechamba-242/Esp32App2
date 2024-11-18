@@ -1,6 +1,7 @@
 package com.mypackage.espapplication.activities
 
 import android.content.Intent
+import android.hardware.Sensor
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.mypackage.espapplication.R
 import com.mypackage.espapplication.models.Profile
+import com.mypackage.espapplication.models.SensorValues
 
 class MainActivity : ComponentActivity() {
     private lateinit var dbRef : DatabaseReference
@@ -52,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
 
     private fun initAll() {
-        dbRef = FirebaseDatabase.getInstance().getReference("i7uoO2cYsIO7s1TqwMgcjAKBuQ33")
+        dbRef = FirebaseDatabase.getInstance().getReference("Data")
         textStatus = findViewById(R.id.statusText)
         cardViewFields = findViewById(R.id.cardViewFields)
         textField1 = findViewById(R.id.tvField1)
@@ -71,9 +73,8 @@ class MainActivity : ComponentActivity() {
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 //nota : debemos cambiar los paths
-                val data = snapshot.child("test").child("int").getValue(String::class.java)
+                val data = snapshot.child("test").getValue(SensorValues::class.java)
                 // aqui se setea la data
-                textField1.text=data
                 //luego hay que comparar respecto al profile elegido
                 compareAndActualize(data,currentProfile)
                 //y fin
@@ -85,7 +86,7 @@ class MainActivity : ComponentActivity() {
         })
 
     }
-    private fun compareAndActualize(data: Any?,profile : Profile) {
+    private fun compareAndActualize(data: SensorValues?,profile : Profile) {
         //necesito la estructura de datos realizada para hacer esto
     }
 
