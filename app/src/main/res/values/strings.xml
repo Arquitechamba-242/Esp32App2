@@ -4,13 +4,15 @@
     <string name="STATUS_OFF">DESCONECTADO</string>
     <string name="STATUS_CONNECTING">CONECTANDO...</string>
     <string name="field0">Perfil Elegido</string>
-    <string name="field1">Temperatura</string>
-    <string name="field2">Presión</string>
-    <string name="field3">Altitud</string>
-    <string name="field4">Alcohol</string>
-    <string name="field5">CO2</string>
-    <string name="field6">Humedad</string>
+    <string name="field1">Alcohol</string>
+    <string name="field2">Altitud</string>
+    <string name="field3">CO2</string>
+    <string name="field4">Humedad</string>
+    <string name="field5">Presión</string>
+    <string name="field6">Temperatura</string>
+    <string name="defaultValueField">value</string>
     <string name="profileButton">Cambiar</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_create_profile">CreateProfileActivity</string>
+    <string name="src_image_descrip">Vector Image</string>
 </resources>
