@@ -1,13 +1,15 @@
+import kotlinx.android.parcel.Parcelize
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.mypackage.espapplication"
     compileSdk = 35
-
     defaultConfig {
         applicationId = "com.mypackage.espapplication"
         minSdk = 24

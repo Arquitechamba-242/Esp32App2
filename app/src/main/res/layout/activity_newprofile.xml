@@ -21,13 +21,18 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="NameProfile"
-                android:gravity="center">
+                android:text="@string/profileNameField"
+                android:gravity="center"
+                android:background="@drawable/back">
             </TextView>
             <EditText
+                android:autofillHints="name"
+                android:id="@+id/editProfileName"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
-                android:hint="Rellenar aqui">
+                android:hint="@string/defaultEditNameText"
+                android:textSize="15sp"
+                android:inputType="text">
             </EditText>
         </LinearLayout>
         <LinearLayout
@@ -37,13 +42,27 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="Temperatura"
-                android:gravity="center">
+                android:text="@string/field1"
+                android:gravity="center"
+                android:background="@drawable/back">
             </TextView>
             <EditText
-                android:layout_width="200dp"
+                android:importantForAutofill="no"
+                android:id="@+id/editMaxAlcohol"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:hint="Rellenar aqui">
+                android:hint="@string/defaultEditMaxValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMinAlcohol"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMinValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
             </EditText>
         </LinearLayout>
         <LinearLayout
@@ -53,13 +72,28 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="Presión"
-                android:gravity="center">
+                android:text="@string/field2"
+                android:gravity="center"
+                android:background="@drawable/back">
             </TextView>
             <EditText
-                android:layout_width="200dp"
+                android:importantForAutofill="no"
+                android:id="@+id/editMaxAltitud"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:hint="Rellenar aqui">
+                android:hint="@string/defaultEditMaxValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMinAltitud"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMinValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+
             </EditText>
         </LinearLayout>
         <LinearLayout
@@ -69,13 +103,27 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="Humedad"
-                android:gravity="center">
+                android:text="@string/field3"
+                android:gravity="center"
+                android:background="@drawable/back">
             </TextView>
             <EditText
-                android:layout_width="200dp"
+                android:importantForAutofill="no"
+                android:id="@+id/editMaxCO2"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:hint="Rellenar aqui">
+                android:hint="@string/defaultEditMaxValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMinCO2"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMinValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
             </EditText>
         </LinearLayout>
         <LinearLayout
@@ -85,13 +133,27 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="NameProfile"
-                android:gravity="center">
+                android:text="@string/field4"
+                android:gravity="center"
+                android:background="@drawable/back">
             </TextView>
             <EditText
-                android:layout_width="200dp"
+                android:importantForAutofill="no"
+                android:id="@+id/editMaxHumedad"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:hint="Rellenar aqui">
+                android:hint="@string/defaultEditMaxValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMinHumedad"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMinValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
             </EditText>
         </LinearLayout>
         <LinearLayout
@@ -101,16 +163,71 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="NameProfile"
-                android:gravity="center">
+                android:text="@string/field5"
+                android:gravity="center"
+                android:background="@drawable/back">
             </TextView>
             <EditText
-                android:layout_width="200dp"
+                android:importantForAutofill="no"
+                android:id="@+id/editMaxPresion"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:hint="Rellenar aqui">
+                android:hint="@string/defaultEditMaxValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMinPresion"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMinValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="@string/field6"
+                android:gravity="center"
+                android:background="@drawable/back">
+            </TextView>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMaxTemperatura"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMaxValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/editMinTemperatura"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="@string/defaultEditMinValueText"
+                android:textSize="15sp"
+                android:inputType="numberDecimal">
             </EditText>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/warning_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutTopProfile"
+        app:layout_constraintBottom_toTopOf="@id/pushProfileButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/red">
+
+    </TextView>
     <Button
         android:id="@+id/pushProfileButton"
         android:layout_width="300dp"
@@ -119,6 +236,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Push Profile">
+        android:text="@string/pushProfileButton">
     </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

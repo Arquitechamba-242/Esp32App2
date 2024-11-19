@@ -12,7 +12,15 @@
     <string name="field6">Temperatura</string>
     <string name="defaultValueField">value</string>
     <string name="profileButton">Cambiar</string>
+    <string name="defaultProfileName">ProfileName</string>
+    <string name="profileNameField">Nombre</string>
+    <string name="selectProfileButton">Seleccionar</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_create_profile">CreateProfileActivity</string>
     <string name="src_image_descrip">Vector Image</string>
+    <string name="defaultEditNameText">Rellenar aqui</string>
+    <string name="pushProfileButton">Guardar</string>
+    <string name="defaultEditMaxValueText">Max. Valor</string>
+    <string name="defaultEditMinValueText">Min. Valor</string>
+    <string name="warningMessage">Complete todos los campos!!!</string>
 </resources>

@@ -44,11 +44,12 @@
                     android:background="@drawable/back">
                 </TextView>
                 <TextView
+                    android:id="@+id/tvProfileName"
                     android:layout_width="125dp"
                     android:layout_height="48dp"
                     android:gravity="center"
                     android:background="@drawable/back"
-                    android:text="default">
+                    android:text="@string/defaultProfileName">
                 </TextView>
                 <Button
                     android:id="@+id/profileButton"

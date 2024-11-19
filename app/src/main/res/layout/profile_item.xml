@@ -7,9 +7,10 @@
     android:layout_marginBottom="5dp"
     >
     <TextView
+        android:id="@+id/profileNameSingleItem"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:text="ProfileName"
+        android:text="@string/defaultProfileName"
         android:gravity="center"
         android:background="@drawable/back"
         >
@@ -19,7 +20,7 @@
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:text="Select Profile">
+        android:text="@string/selectProfileButton">
 
     </Button>
 </LinearLayout>

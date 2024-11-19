@@ -1,5 +1,6 @@
 package com.mypackage.espapplication.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.hardware.Sensor
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -42,7 +44,16 @@ class MainActivity : ComponentActivity() {
     private  lateinit var  textField6 : TextView
     private lateinit var textField6Vec : ImageView
     private lateinit var profileButton : Button
+    private lateinit var profileName : TextView
     private lateinit var currentProfile: Profile
+    private lateinit var data: SensorValues
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == RESULT_OK){
+            currentProfile = it.data!!.extras!!.get("profile") as Profile
+            profileName.text = currentProfile.name
+            compareAndActualize(data,currentProfile)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +62,9 @@ class MainActivity : ComponentActivity() {
         initAll()
         profileButton.setOnClickListener {
             val intentToProfiles = Intent(this, ProfileActivity::class.java)
-            startActivity(intentToProfiles)
+            //startActivity(intentToProfiles)
+            launcher.launch(intentToProfiles)
         }
-
         setValues()
     }
 
@@ -75,14 +86,15 @@ class MainActivity : ComponentActivity() {
         textField5Vec = findViewById(R.id.tvField5Vec)
         textField6Vec = findViewById(R.id.tvField6Vec)
         profileButton = findViewById(R.id.profileButton)
+        profileName = findViewById(R.id.tvProfileName)
         currentProfile = Profile()
     }
 
     private fun setValues() {
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val data  = snapshot.child("test").getValue(SensorValues::class.java)
-                if(data!!.Estado == 1){
+                data  = snapshot.child("test").getValue(SensorValues::class.java)!!
+                if(data.Estado == 1){
                     textStatus.setText(R.string.STATUS_CONNECTING)
                     textStatus.visibility = TextView.GONE
                     cardViewFields.visibility = CardView.VISIBLE
@@ -97,16 +109,17 @@ class MainActivity : ComponentActivity() {
 
     }
     private fun compareAndActualize(data: SensorValues?,profile : Profile) {
+
         textField1.text = String.format(Locale.ENGLISH,"%f",data!!.Alcohol)
         textField2.text = String.format(Locale.ENGLISH,"%f",data.Altitud)
         textField3.text = String.format(Locale.ENGLISH,"%f",data.CO2)
         textField4.text = String.format(Locale.ENGLISH,"%f",data.HumedadDeSuelo)
         textField5.text = String.format(Locale.ENGLISH,"%f",data.Presion)
         textField6.text = String.format(Locale.ENGLISH,"%f",data.Temperatura)
-        if(data!!.Alcohol>profile.Alcohol.maxValue){
+        if(data!!.Alcohol>profile.alcohol.maxValue){
             textField1.setTextColor(getColor(R.color.red))
             textField1Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Alcohol<profile.Alcohol.minValue){
+        }else if(data.Alcohol<profile.alcohol.minValue){
             textField1.setTextColor(getColor(R.color.red))
             textField1Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -114,10 +127,10 @@ class MainActivity : ComponentActivity() {
             textField1Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.Altitud>profile.Altitud.maxValue){
+        if(data.Altitud>profile.altitud.maxValue){
             textField2.setTextColor(getColor(R.color.red))
             textField2Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Altitud<profile.Altitud.minValue){
+        }else if(data.Altitud<profile.altitud.minValue){
             textField2.setTextColor(getColor(R.color.red))
             textField2Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -125,10 +138,10 @@ class MainActivity : ComponentActivity() {
             textField2Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.CO2>profile.C02.maxValue){
+        if(data.CO2>profile.c02.maxValue){
             textField3.setTextColor(getColor(R.color.red))
             textField3Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.CO2<profile.C02.minValue){
+        }else if(data.CO2<profile.c02.minValue){
             textField3.setTextColor(getColor(R.color.red))
             textField3Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -136,10 +149,10 @@ class MainActivity : ComponentActivity() {
             textField3Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.HumedadDeSuelo>profile.HumedadDeSuelo.maxValue){
+        if(data.HumedadDeSuelo>profile.humedadDeSuelo.maxValue){
             textField4.setTextColor(getColor(R.color.red))
             textField4Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.HumedadDeSuelo<profile.HumedadDeSuelo.minValue){
+        }else if(data.HumedadDeSuelo<profile.humedadDeSuelo.minValue){
             textField4.setTextColor(getColor(R.color.red))
             textField4Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -147,10 +160,10 @@ class MainActivity : ComponentActivity() {
             textField4Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.Presion>profile.Presion.maxValue){
+        if(data.Presion>profile.presion.maxValue){
             textField5.setTextColor(getColor(R.color.red))
             textField5Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Presion<profile.Presion.minValue){
+        }else if(data.Presion<profile.presion.minValue){
             textField5.setTextColor(getColor(R.color.red))
             textField5Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -158,10 +171,10 @@ class MainActivity : ComponentActivity() {
             textField5Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.Temperatura>profile.Temperatura.maxValue){
+        if(data.Temperatura>profile.temperatura.maxValue){
             textField6.setTextColor(getColor(R.color.red))
             textField6Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Temperatura<profile.Temperatura.minValue){
+        }else if(data.Temperatura<profile.temperatura.minValue){
             textField6.setTextColor(getColor(R.color.red))
             textField6Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
