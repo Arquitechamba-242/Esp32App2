@@ -47,6 +47,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var profileName : TextView
     private lateinit var currentProfile: Profile
     private lateinit var data: SensorValues
+
+
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK){
             currentProfile = it.data!!.extras!!.get("profile") as Profile
@@ -70,7 +72,7 @@ class MainActivity : ComponentActivity() {
 
 
     private fun initAll() {
-        dbRef = FirebaseDatabase.getInstance().getReference("Data")
+        dbRef = FirebaseDatabase.getInstance().getReference("data")
         textStatus = findViewById(R.id.statusText)
         cardViewFields = findViewById(R.id.cardViewFields)
         textField1 = findViewById(R.id.tvField1)
@@ -93,8 +95,8 @@ class MainActivity : ComponentActivity() {
     private fun setValues() {
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                data  = snapshot.child("test").getValue(SensorValues::class.java)!!
-                if(data.Estado == 1){
+                data  = snapshot.getValue(SensorValues::class.java)!!
+                if(data.estado == 0){
                     textStatus.setText(R.string.STATUS_CONNECTING)
                     textStatus.visibility = TextView.GONE
                     cardViewFields.visibility = CardView.VISIBLE
@@ -110,16 +112,16 @@ class MainActivity : ComponentActivity() {
     }
     private fun compareAndActualize(data: SensorValues?,profile : Profile) {
 
-        textField1.text = String.format(Locale.ENGLISH,"%f",data!!.Alcohol)
-        textField2.text = String.format(Locale.ENGLISH,"%f",data.Altitud)
-        textField3.text = String.format(Locale.ENGLISH,"%f",data.CO2)
-        textField4.text = String.format(Locale.ENGLISH,"%f",data.HumedadDeSuelo)
-        textField5.text = String.format(Locale.ENGLISH,"%f",data.Presion)
-        textField6.text = String.format(Locale.ENGLISH,"%f",data.Temperatura)
-        if(data!!.Alcohol>profile.alcohol.maxValue){
+        textField1.text = String.format(Locale.ENGLISH,"%f",data!!.alcohol)
+        textField2.text = String.format(Locale.ENGLISH,"%f",data.altitud)
+        textField3.text = String.format(Locale.ENGLISH,"%f",data.c02)
+        textField4.text = String.format(Locale.ENGLISH,"%f",data.humedadDeSuelo)
+        textField5.text = String.format(Locale.ENGLISH,"%f",data.presion)
+        textField6.text = String.format(Locale.ENGLISH,"%f",data.temperatura)
+        if(data!!.alcohol>profile.alcohol.maxValue){
             textField1.setTextColor(getColor(R.color.red))
             textField1Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Alcohol<profile.alcohol.minValue){
+        }else if(data.alcohol<profile.alcohol.minValue){
             textField1.setTextColor(getColor(R.color.red))
             textField1Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -127,10 +129,10 @@ class MainActivity : ComponentActivity() {
             textField1Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.Altitud>profile.altitud.maxValue){
+        if(data.altitud>profile.altitud.maxValue){
             textField2.setTextColor(getColor(R.color.red))
             textField2Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Altitud<profile.altitud.minValue){
+        }else if(data.altitud<profile.altitud.minValue){
             textField2.setTextColor(getColor(R.color.red))
             textField2Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -138,10 +140,10 @@ class MainActivity : ComponentActivity() {
             textField2Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.CO2>profile.c02.maxValue){
+        if(data.c02>profile.c02.maxValue){
             textField3.setTextColor(getColor(R.color.red))
             textField3Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.CO2<profile.c02.minValue){
+        }else if(data.c02<profile.c02.minValue){
             textField3.setTextColor(getColor(R.color.red))
             textField3Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -149,10 +151,10 @@ class MainActivity : ComponentActivity() {
             textField3Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.HumedadDeSuelo>profile.humedadDeSuelo.maxValue){
+        if(data.humedadDeSuelo>profile.humedadDeSuelo.maxValue){
             textField4.setTextColor(getColor(R.color.red))
             textField4Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.HumedadDeSuelo<profile.humedadDeSuelo.minValue){
+        }else if(data.humedadDeSuelo<profile.humedadDeSuelo.minValue){
             textField4.setTextColor(getColor(R.color.red))
             textField4Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -160,10 +162,10 @@ class MainActivity : ComponentActivity() {
             textField4Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.Presion>profile.presion.maxValue){
+        if(data.presion>profile.presion.maxValue){
             textField5.setTextColor(getColor(R.color.red))
             textField5Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Presion<profile.presion.minValue){
+        }else if(data.presion<profile.presion.minValue){
             textField5.setTextColor(getColor(R.color.red))
             textField5Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -171,10 +173,10 @@ class MainActivity : ComponentActivity() {
             textField5Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.Temperatura>profile.temperatura.maxValue){
+        if(data.temperatura>profile.temperatura.maxValue){
             textField6.setTextColor(getColor(R.color.red))
             textField6Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.Temperatura<profile.temperatura.minValue){
+        }else if(data.temperatura<profile.temperatura.minValue){
             textField6.setTextColor(getColor(R.color.red))
             textField6Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
