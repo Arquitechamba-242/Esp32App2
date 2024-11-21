@@ -64,7 +64,6 @@ class MainActivity : ComponentActivity() {
         initAll()
         profileButton.setOnClickListener {
             val intentToProfiles = Intent(this, ProfileActivity::class.java)
-            //startActivity(intentToProfiles)
             launcher.launch(intentToProfiles)
         }
         setValues()

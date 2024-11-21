@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_user"
     tools:context=".activities.ProfileActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProfiles"
@@ -26,6 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/background_newprofile"
         android:text="Create New Profile"
         >
     </Button>
