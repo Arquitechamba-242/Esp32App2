@@ -4,14 +4,25 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_user"
+    android:background="@drawable/back_main"
     tools:context=".activities.ProfileActivity">
+    <TextView
+        android:id="@+id/titleProfileActivity"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewProfiles"
+        style="@style/titleStyle"
+        android:text="@string/title5">
+
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProfiles"
         android:layout_width="wrap_content"
         android:layout_height="600dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleProfileActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/profile_item"
@@ -27,8 +38,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/background_newprofile"
-        android:text="Create New Profile"
+        android:layout_marginBottom="30dp"
+        style="@style/buttonStyle"
+        android:text="@string/title4"
         >
     </Button>
 

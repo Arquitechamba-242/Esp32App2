@@ -2,20 +2,9 @@ package com.mypackage.espapplication.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Looper
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.node.getOrAddAdapter
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -24,9 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.mypackage.espapplication.R
-import com.mypackage.espapplication.activities.ui.theme.ESPApplicationTheme
 import com.mypackage.espapplication.adapters.mAdapter
-import com.mypackage.espapplication.models.Parameter
 import com.mypackage.espapplication.models.Profile
 
 class ProfileActivity : ComponentActivity() {
@@ -43,10 +30,6 @@ class ProfileActivity : ComponentActivity() {
             val intentToCreateProfileActivity : Intent = Intent(this@ProfileActivity,CreateProfileActivity::class.java)
             startActivity(intentToCreateProfileActivity)
         }
-        /*
-        dbProfRef.child("Profile1").setValue(Profile("@554562","newProfile",
-            Parameter(125.0,48.0),Parameter(89.2,54.0),Parameter(12.3,-2.3),Parameter(54.2,23.1),Parameter(54.8,25.1),
-            Parameter(87.1,69.3)))*/
         getProfileData()
     }
 
@@ -62,10 +45,17 @@ class ProfileActivity : ComponentActivity() {
                 }
                 val pAdapter = mAdapter(profileList)
                 profilesRecyclerView.adapter = pAdapter
-                pAdapter.setOnProfileClickListener(object : mAdapter.onProfileButtonClickListener{
-                    override fun onProfileClick(position: Int) {
+                pAdapter.setOnProfileButtonClickListener(object : mAdapter.OnProfileButtonClickListener{
+                    override fun onButtonProfileClick(position: Int) {
                         setResult(RESULT_OK,Intent().putExtra("profile",profileList[position]))
                         finish()
+                    }
+                })
+                pAdapter.setOnProfileViewClickListener(object : mAdapter.OnProfileViewClickListener{
+                    override fun onProfileViewClick(position: Int) {
+                        val intentToDisplayProfile = Intent(this@ProfileActivity,DisplayProfileActivity::class.java)
+                        intentToDisplayProfile.putExtra("profileSelected",profileList[position])
+                        startActivity(intentToDisplayProfile)
                     }
                 })
             }

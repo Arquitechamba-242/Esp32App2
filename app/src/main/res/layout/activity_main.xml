@@ -10,35 +10,23 @@
     android:scrollbars="vertical">
 
     <TextView
-        android:id="@+id/statusText"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/STATUS_OFF"
-        android:gravity="center"
-        android:visibility="gone"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/title"
+        android:id="@+id/title1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="80dp"
+        android:paddingTop="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/titleStyle"
         android:textStyle="bold"
-        android:text="ESP32 APP"
+        android:text="@string/title1"
         android:gravity="center">
     </TextView>
     <TableLayout
         android:id="@+id/profileMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
@@ -51,6 +39,7 @@
                 android:layout_width="125dp"
                 android:layout_height="25dp"
                 android:gravity="center"
+                android:layout_gravity="center_vertical"
                 android:textStyle="bold"
                 android:text="@string/field0">
 
@@ -62,20 +51,22 @@
                 android:layout_height="25dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
+                android:layout_gravity="center_vertical"
                 android:text="default">
             </TextView>
             <Button
                 android:id="@+id/profileButton"
                 android:layout_width="90dp"
-                android:layout_height="25dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                style="@style/cellTableStyle"
+                style="@style/buttonStyle"
                 android:textStyle="bold"
                 android:text="@string/profileButton">
             </Button>
         </TableRow>
     </TableLayout>
     <TableLayout
+        android:id="@+id/tableSensorValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/profileMenu"
@@ -86,7 +77,7 @@
         >
         <TableRow>
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
@@ -97,14 +88,15 @@
 
             <TextView
                 android:id="@+id/tvField1"
-                style="@style/cellTableStyle"
-                android:layout_width="150dp"
+                style="@style/cellValueTheme"
+                android:layout_width="110dp"
                 android:layout_height="40dp"
                 android:gravity="center"
-                android:text="value">
+                android:text="@string/defaultValueField">
 
             </TextView>
             <ImageView
+                android:contentDescription="@string/src_image_descrip"
                 android:id="@+id/tvField1Vec"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
@@ -116,7 +108,7 @@
         <TableRow>
             <TextView
                 android:textStyle="bold"
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
@@ -126,15 +118,16 @@
 
             <TextView
                 android:id="@+id/tvField2"
-                style="@style/cellTableStyle"
-                android:layout_width="150dp"
+                style="@style/cellValueTheme"
+                android:layout_width="110dp"
                 android:layout_height="40dp"
                 android:gravity="center"
-                android:text="value">
+                android:text="@string/defaultValueField">
 
             </TextView>
 
             <ImageView
+                android:contentDescription="@string/src_image_descrip"
                 android:id="@+id/tvField2Vec"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
@@ -146,7 +139,7 @@
         <TableRow>
             <TextView
                 android:textStyle="bold"
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
@@ -156,15 +149,16 @@
 
             <TextView
                 android:id="@+id/tvField3"
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="40dp"
-                style="@style/cellTableStyle"
+                style="@style/cellValueTheme"
                 android:gravity="center"
-                android:text="value">
+                android:text="@string/defaultValueField">
 
             </TextView>
 
             <ImageView
+                android:contentDescription="@string/src_image_descrip"
                 android:id="@+id/tvField3Vec"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
@@ -176,7 +170,7 @@
         <TableRow>
             <TextView
                 android:textStyle="bold"
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
@@ -186,15 +180,16 @@
 
             <TextView
                 android:id="@+id/tvField4"
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="40dp"
-                style="@style/cellTableStyle"
+                style="@style/cellValueTheme"
                 android:gravity="center"
-                android:text="value">
+                android:text="@string/defaultValueField">
 
             </TextView>
 
             <ImageView
+                android:contentDescription="@string/src_image_descrip"
                 android:id="@+id/tvField4Vec"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
@@ -206,7 +201,7 @@
         <TableRow>
             <TextView
                 android:textStyle="bold"
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
@@ -216,15 +211,16 @@
 
             <TextView
                 android:id="@+id/tvField5"
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="40dp"
-                style="@style/cellTableStyle"
+                style="@style/cellValueTheme"
                 android:gravity="center"
-                android:text="value">
+                android:text="@string/defaultValueField">
 
             </TextView>
 
             <ImageView
+                android:contentDescription="@string/src_image_descrip"
                 android:id="@+id/tvField5Vec"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
@@ -236,7 +232,7 @@
         <TableRow>
             <TextView
                 android:textStyle="bold"
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center"
@@ -246,24 +242,53 @@
 
             <TextView
                 android:id="@+id/tvField6"
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="40dp"
-                style="@style/cellTableStyle"
+                style="@style/cellValueTheme"
                 android:gravity="center"
-                android:text="value">
+                android:text="@string/defaultValueField">
 
             </TextView>
 
             <ImageView
+                android:contentDescription="@string/src_image_descrip"
                 android:id="@+id/tvField6Vec"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 style="@style/cellTableStyle"
                 android:gravity="center">
-
             </ImageView>
         </TableRow>
     </TableLayout>
+    <TextView
+        android:id="@+id/title2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tableSensorValues"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="@string/title2"
+        style="@style/titleStyle">
+
+    </TextView>
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/plot"
+        app:layout_constraintTop_toBottomOf="@id/title2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/APDefacto.Dark"
+        android:layout_marginBottom="10dp"
+        android:layout_width="390dp"
+        android:layout_height="340dp"
+        app:lineLabels = "left"
+
+        app:legendWidthMode= "absolute"
+        app:legendWidth = "320dp"
+        app:lineLabelRotationBottom = "-45"
+        >
+    </com.androidplot.xy.XYPlot>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -15,7 +15,7 @@ data class Profile(
     var name : String = "defaultProfile",
     var alcohol : Parameter = Parameter(),
     var altitud : Parameter = Parameter(),
-    var c02 : Parameter = Parameter(),
-    var humedadDeSuelo : Parameter = Parameter(),
+    var co2 : Parameter = Parameter(),
+    var humedaddesuelo : Parameter = Parameter(),
     var presion : Parameter = Parameter(),
     var temperatura : Parameter = Parameter()) : Parcelable

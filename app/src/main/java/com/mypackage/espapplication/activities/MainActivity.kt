@@ -1,19 +1,19 @@
 package com.mypackage.espapplication.activities
 
-import android.app.Activity
+import kotlin.math.round
 import android.content.Intent
-import android.hardware.Sensor
 import android.os.Bundle
-import android.os.Handler
-import android.renderscript.Sampler.Value
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.cardview.widget.CardView
+import com.androidplot.xy.BoundaryMode
+import com.androidplot.xy.LineAndPointFormatter
+import com.androidplot.xy.SimpleXYSeries
+import com.androidplot.xy.XYPlot
+import com.androidplot.xy.XYSeries
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -22,14 +22,12 @@ import com.google.firebase.database.ValueEventListener
 import com.mypackage.espapplication.R
 import com.mypackage.espapplication.models.Profile
 import com.mypackage.espapplication.models.SensorValues
-import org.w3c.dom.Text
 import java.util.Locale
+
 
 class MainActivity : ComponentActivity() {
     private lateinit var dbRef : DatabaseReference
 
-    private lateinit var textStatus : TextView
-    //private lateinit var cardViewFields : CardView
 
     private  lateinit var  textField1 : TextView
     private lateinit var textField1Vec : ImageView
@@ -47,7 +45,21 @@ class MainActivity : ComponentActivity() {
     private lateinit var profileName : TextView
     private lateinit var currentProfile: Profile
     private lateinit var data: SensorValues
+    private lateinit var xyPlot: XYPlot
 
+    private var arrayAlcohol : ArrayList<Number>? = arrayListOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
+    private var arrayAltitud : ArrayList<Number>? = arrayListOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
+    private var arrayCO2 : ArrayList<Number>? = arrayListOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
+    private var arrayHumedadSuelo : ArrayList<Number>? = arrayListOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
+    private var arrayPresion : ArrayList<Number>? = arrayListOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
+    private var arrayTemperatura : ArrayList<Number>? = arrayListOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0)
+
+    private lateinit var series1 : XYSeries
+    private lateinit var series2: XYSeries
+    private lateinit var series3 : XYSeries
+    private lateinit var series4 : XYSeries
+    private lateinit var series5: XYSeries
+    private lateinit var series6 : XYSeries
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK){
@@ -67,13 +79,12 @@ class MainActivity : ComponentActivity() {
             launcher.launch(intentToProfiles)
         }
         setValues()
+
     }
 
 
     private fun initAll() {
         dbRef = FirebaseDatabase.getInstance().getReference("data")
-        textStatus = findViewById(R.id.statusText)
-        //cardViewFields = findViewById(R.id.cardViewFields)
         textField1 = findViewById(R.id.tvField1)
         textField2 = findViewById(R.id.tvField2)
         textField3 = findViewById(R.id.tvField3)
@@ -89,18 +100,33 @@ class MainActivity : ComponentActivity() {
         profileButton = findViewById(R.id.profileButton)
         profileName = findViewById(R.id.tvProfileName)
         currentProfile = Profile()
+
+        xyPlot = findViewById(R.id.plot)
+        //xyPlot.renderMode = Plot.RenderMode.USE_BACKGROUND_THREAD
+        series1 = SimpleXYSeries(arrayAlcohol, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series1")
+        series2 = SimpleXYSeries(arrayAltitud, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series1")
+        series3 = SimpleXYSeries(arrayCO2,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Series3")
+        series4 = SimpleXYSeries(arrayHumedadSuelo,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Series4")
+        series5 = SimpleXYSeries(arrayPresion,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Series5")
+        series6 = SimpleXYSeries(arrayTemperatura,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Series6")
+
+        xyPlot.addSeries(series1, LineAndPointFormatter(this,R.xml.formatter1))
+        xyPlot.addSeries(series2, LineAndPointFormatter(this,R.xml.formatter2))
+        xyPlot.addSeries(series3, LineAndPointFormatter(this,R.xml.formatter3))
+        xyPlot.addSeries(series4, LineAndPointFormatter(this,R.xml.formatter4))
+        xyPlot.addSeries(series5, LineAndPointFormatter(this,R.xml.formatter5))
+        xyPlot.addSeries(series6, LineAndPointFormatter(this,R.xml.formatter6))
+
+        xyPlot.setRangeBoundaries(-5,BoundaryMode.FIXED,11,BoundaryMode.FIXED)
+        xyPlot.setDomainBoundaries(0,10,BoundaryMode.FIXED)
     }
 
     private fun setValues() {
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 data  = snapshot.getValue(SensorValues::class.java)!!
-                if(data.estado == 0){
-                    textStatus.setText(R.string.STATUS_CONNECTING)
-                    textStatus.visibility = TextView.GONE
-                    //cardViewFields.visibility = CardView.VISIBLE
-                }
                 compareAndActualize(data,currentProfile)
+                appendInPlot(data)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -109,15 +135,50 @@ class MainActivity : ComponentActivity() {
         })
 
     }
+    private fun appendInPlot(data: SensorValues) {
+        removeAndAppend(arrayAlcohol,round(data.alcohol * 10)/100)
+        removeAndAppend(arrayAltitud,round(data.altitud * 10)/100)
+        removeAndAppend(arrayCO2,round(data.co2*100)/10000)
+        removeAndAppend(arrayHumedadSuelo,round(data.humedaddesuelo*10)/100)
+        removeAndAppend(arrayPresion, round(data.presion)/1000)
+        removeAndAppend(arrayTemperatura,round(data.temperatura*10)/100)
+
+        xyPlot.removeSeries(series1)
+        xyPlot.removeSeries(series2)
+        xyPlot.removeSeries(series3)
+        xyPlot.removeSeries(series4)
+        xyPlot.removeSeries(series5)
+        xyPlot.removeSeries(series6)
+
+        series1 = SimpleXYSeries(arrayAlcohol,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Alc")
+        series2 = SimpleXYSeries(arrayAltitud,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Alt")
+        series3 = SimpleXYSeries(arrayCO2,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"CO2")
+        series4 = SimpleXYSeries(arrayHumedadSuelo,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"H.S.")
+        series5 = SimpleXYSeries(arrayPresion,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"P.")
+        series6 = SimpleXYSeries(arrayTemperatura,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"T.")
+
+        xyPlot.addSeries(series1,LineAndPointFormatter(this,R.xml.formatter1))
+        xyPlot.addSeries(series2,LineAndPointFormatter(this,R.xml.formatter2))
+        xyPlot.addSeries(series3,LineAndPointFormatter(this,R.xml.formatter3))
+        xyPlot.addSeries(series4,LineAndPointFormatter(this,R.xml.formatter4))
+        xyPlot.addSeries(series5,LineAndPointFormatter(this,R.xml.formatter5))
+        xyPlot.addSeries(series6,LineAndPointFormatter(this,R.xml.formatter6))
+        xyPlot.redraw()
+    }
+
+    private fun removeAndAppend(array: ArrayList<Number>?, value: Double) {
+        array!!.removeAt(0)
+        array.add(value)
+    }
     private fun compareAndActualize(data: SensorValues?,profile : Profile) {
 
         textField1.text = String.format(Locale.ENGLISH,"%f",data!!.alcohol)
         textField2.text = String.format(Locale.ENGLISH,"%f",data.altitud)
-        textField3.text = String.format(Locale.ENGLISH,"%f",data.c02)
-        textField4.text = String.format(Locale.ENGLISH,"%f",data.humedadDeSuelo)
+        textField3.text = String.format(Locale.ENGLISH,"%f",data.co2)
+        textField4.text = String.format(Locale.ENGLISH,"%f",data.humedaddesuelo)
         textField5.text = String.format(Locale.ENGLISH,"%f",data.presion)
         textField6.text = String.format(Locale.ENGLISH,"%f",data.temperatura)
-        if(data!!.alcohol>profile.alcohol.maxValue){
+        if(data.alcohol>profile.alcohol.maxValue){
             textField1.setTextColor(getColor(R.color.red))
             textField1Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
         }else if(data.alcohol<profile.alcohol.minValue){
@@ -139,10 +200,10 @@ class MainActivity : ComponentActivity() {
             textField2Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.c02>profile.c02.maxValue){
+        if(data.co2>profile.co2.maxValue){
             textField3.setTextColor(getColor(R.color.red))
             textField3Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.c02<profile.c02.minValue){
+        }else if(data.co2<profile.co2.minValue){
             textField3.setTextColor(getColor(R.color.red))
             textField3Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
@@ -150,10 +211,10 @@ class MainActivity : ComponentActivity() {
             textField3Vec.setImageDrawable(getDrawable(R.drawable.normal_range))
         }
 
-        if(data.humedadDeSuelo>profile.humedadDeSuelo.maxValue){
+        if(data.humedaddesuelo>profile.humedaddesuelo.maxValue){
             textField4.setTextColor(getColor(R.color.red))
             textField4Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_up))
-        }else if(data.humedadDeSuelo<profile.humedadDeSuelo.minValue){
+        }else if(data.humedaddesuelo<profile.humedaddesuelo.minValue){
             textField4.setTextColor(getColor(R.color.red))
             textField4Vec.setImageDrawable(getDrawable(R.drawable.out_of_range_down))
         }else{
