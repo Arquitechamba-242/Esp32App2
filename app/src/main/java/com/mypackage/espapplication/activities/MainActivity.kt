@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var dbRef : DatabaseReference
 
     private lateinit var textStatus : TextView
-    private lateinit var cardViewFields : CardView
+    //private lateinit var cardViewFields : CardView
 
     private  lateinit var  textField1 : TextView
     private lateinit var textField1Vec : ImageView
@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
     private fun initAll() {
         dbRef = FirebaseDatabase.getInstance().getReference("data")
         textStatus = findViewById(R.id.statusText)
-        cardViewFields = findViewById(R.id.cardViewFields)
+        //cardViewFields = findViewById(R.id.cardViewFields)
         textField1 = findViewById(R.id.tvField1)
         textField2 = findViewById(R.id.tvField2)
         textField3 = findViewById(R.id.tvField3)
@@ -98,7 +98,7 @@ class MainActivity : ComponentActivity() {
                 if(data.estado == 0){
                     textStatus.setText(R.string.STATUS_CONNECTING)
                     textStatus.visibility = TextView.GONE
-                    cardViewFields.visibility = CardView.VISIBLE
+                    //cardViewFields.visibility = CardView.VISIBLE
                 }
                 compareAndActualize(data,currentProfile)
             }

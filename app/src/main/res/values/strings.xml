@@ -3,7 +3,7 @@
     <string name="STATUS_ON">CONECTADO</string>
     <string name="STATUS_OFF">DESCONECTADO</string>
     <string name="STATUS_CONNECTING">CONECTANDO...</string>
-    <string name="field0">Perfil Elegido</string>
+    <string name="field0">Perfil </string>
     <string name="field1">Alcohol</string>
     <string name="field2">Altitud</string>
     <string name="field3">CO2</string>

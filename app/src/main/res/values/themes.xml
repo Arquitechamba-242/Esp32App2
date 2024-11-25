@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.ESPApplication" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="cellTableStyle" parent="android:Widget.TextView">
+        <item name="android:background">@drawable/back_item_cell</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+    </style>
+    <style name="titleStyle" parent="TextAppearance.AppCompat">
+        <item name="android:background">@drawable/back_title</item>
+        <item name="android:fontFamily">@font/biryani_extralight</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
