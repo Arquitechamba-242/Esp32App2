@@ -1,4 +1,3 @@
-import kotlinx.android.parcel.Parcelize
 
 plugins {
     alias(libs.plugins.android.application)

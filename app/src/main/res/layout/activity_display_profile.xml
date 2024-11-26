@@ -28,14 +28,14 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:autofillHints="name"
                 android:id="@+id/displayProfileName"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 style="@style/editTextTheme"
                 android:textSize="15sp">
-            </TextView>
+            </EditText>
         </TableRow>
     </TableLayout>
     <TableLayout
@@ -55,20 +55,24 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:id="@+id/displayMaxAlcohol"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
-            <TextView
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
                 android:id="@+id/displayMinAlcohol"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
         </TableRow>
         <TableRow>
             <TextView
@@ -78,21 +82,24 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:id="@+id/displayMaxAltitud"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
-            <TextView
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
                 android:id="@+id/displayMinAltitud"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-
-            </TextView>
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
         </TableRow>
         <TableRow>
             <TextView
@@ -102,20 +109,24 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:id="@+id/displayMaxCO2"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
-            <TextView
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
                 android:id="@+id/displayMinCO2"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
         </TableRow>
         <TableRow>
             <TextView
@@ -125,21 +136,25 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:id="@+id/displayMaxHumedad"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
-            <TextView
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
                 android:id="@+id/displayMinHumedad"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
 
-            </TextView>
+            </EditText>
         </TableRow>
         <TableRow>
             <TextView
@@ -149,21 +164,24 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:id="@+id/displayMaxPresion"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
-            <TextView
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
                 android:id="@+id/displayMinPresion"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-
-            </TextView>
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
         </TableRow>
         <TableRow>
             <TextView
@@ -173,22 +191,49 @@
                 android:gravity="center"
                 style="@style/cellTableStyle">
             </TextView>
-            <TextView
+            <EditText
                 android:id="@+id/displayMaxTemp"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-            </TextView>
-            <TextView
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
+            <EditText
                 android:id="@+id/displayMinTemp"
+                android:importantForAutofill="no"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textSize="15sp"
-                style="@style/editTextTheme">
-
-            </TextView>
+                style="@style/editTextTheme"
+                android:inputType="numberDecimal">
+            </EditText>
         </TableRow>
     </TableLayout>
-
+    <Button
+        android:id="@+id/modifyProfileButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/tableDisplayProfile"
+        app:layout_constraintBottom_toTopOf="@id/deleteProfileButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/modifyProfileButton"
+        style="@style/buttonStyle"
+        android:visibility="visible"
+        >
+    </Button>
+    <Button
+        android:id="@+id/deleteProfileButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/modifyProfileButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/buttonRedStyle"
+        android:layout_marginBottom="70dp"
+        android:text="@string/deleteProfileButton">
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

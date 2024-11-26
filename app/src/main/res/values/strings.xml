@@ -29,4 +29,6 @@
     <string name="title3">MOSTRAR PERFIL</string>
     <string name="title4">CREAR NUEVO PERFIL</string>
     <string name="title5">PEEFILES DISPONIBLES</string>
+    <string name="deleteProfileButton">BORRAR</string>
+    <string name="modifyProfileButton">Modificar</string>
 </resources>
