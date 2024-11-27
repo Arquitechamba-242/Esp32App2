@@ -4,7 +4,7 @@
     <string name="STATUS_OFF">DESCONECTADO</string>
     <string name="STATUS_CONNECTING">CONECTANDO...</string>
     <string name="field0">Perfil </string>
-    <string name="field1">Alcohol (mg/L)</string>
+    <string name="field1">Alcohol (ppm)</string>
     <string name="field2">Altitud (m)</string>
     <string name="field3">CO2 (mg/L)</string>
     <string name="field4">Humedad (%)</string>
